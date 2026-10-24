@@ -1,7 +1,7 @@
 profiles:
   default:
     platforms:
-      - platform: arduino:zephyr (0.55.2)
+      - platform: arduino:zephyr (1.0.0)
     libraries:
       - Arduino_RouterBridge (0.4.2)
       - Arduino_RPClite (0.3.0)
