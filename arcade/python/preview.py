@@ -3,11 +3,12 @@
 DEAD_ZONE = 26
 INVERT_X = False
 INVERT_Y = True
-MOVEMENT_ZERO_MG = (50, -75, 1034)
+MOVEMENT_ZERO_MG = (-15, -994, 13)
 MOVEMENT_DEAD_ZONE_MG = 20
 
 
-def frame_values(inputs):
+def calibrated(inputs):
+    """Validate one snapshot; return (x, y, pressed, ax, ay, az, connected)."""
     limits = {
         "connected": (0, 7), "buttons": (0, 15),
         "x": (-127, 128), "y": (-127, 128),
@@ -33,8 +34,13 @@ def frame_values(inputs):
         delta = inputs[key] - zero if connected & 4 else 0
         acceleration.append(0 if abs(delta) < MOVEMENT_DEAD_ZONE_MG
                             else max(-16000, min(16000, delta)))
+    return (x, y, pressed, *acceleration, connected)
+
+
+def frame_values(inputs):
+    x, y, pressed, ax, ay, az, connected = calibrated(inputs)
     return (
         max(20, min(460, 240 + round(x * 220 / 128))),
         max(168, min(300, 234 + round(y * 66 / 128))),
-        pressed, *acceleration, connected,
+        pressed, ax, ay, az, connected,
     )

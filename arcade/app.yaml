@@ -1,5 +1,5 @@
-name: UNO Q Arcade Starter
-description: Read the Modulino controls and draw a live preview on the console's TFT.
+name: Level Devil
+description: Trap platformer on the UNO Q console. Stick to run, A to jump, tilt to steer the blue platforms.
 ports: []
 bricks: []
 icon: "🕹️"
